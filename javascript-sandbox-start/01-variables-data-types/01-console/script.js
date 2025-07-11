@@ -5,3 +5,6 @@ function isOnefulPair(a, b) {
       console.log("No")
     }
   }
+
+
+  // Test 
