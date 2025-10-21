@@ -1,11 +1,22 @@
 function fetchUser() {
   showSpinner();
   fetch('https://randomuser.me/api')
-    .then((res) => res.json())
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('New Error')
+      }
+
+      return res.json()
+    })
     .then((data) => {
       hideSpinner();
       displayUser(data.results[0]);
-    });
+    })
+    .catch(error => {
+      hideSpinner();
+      document.querySelector('#user').innerHTML = `<p class="text-xl text-center text-red-500 mb-5">${error}</p>`     // added a few classes with "<p = paragraph>..."
+      console.log('New Error pt 2');
+    })
 }
 
 function displayUser(user) {
